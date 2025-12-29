@@ -1,22 +1,18 @@
 def fibonacci(n):
     """
-    Calculates the n-th Fibonacci number.
+    Calculates the nth Fibonacci number.
 
-    The Fibonacci sequence starts with 0, 1, 1, 2, 3, 5, ...
-    - fibonacci(0) returns 0
-    - fibonacci(1) returns 1
-    - fibonacci(2) returns 1
-    - fibonacci(3) returns 2
+    The Fibonacci sequence starts with F(0) = 0 and F(1) = 1.
+    F(n) = F(n-1) + F(n-2) for n > 1.
 
     Args:
-        n (int): The non-negative index of the Fibonacci number to calculate.
+        n (int): The index of the Fibonacci number to calculate (non-negative).
 
     Returns:
-        int: The n-th Fibonacci number. Returns -1 for invalid input (n < 0).
+        int: The nth Fibonacci number. Returns 0 for negative input.
     """
     if n < 0:
-        # Invalid input for a Fibonacci index
-        return -1
+        return 0  # Fibonacci numbers are typically defined for non-negative integers
     elif n == 0:
         return 0
     elif n == 1:
@@ -27,42 +23,26 @@ def fibonacci(n):
             a, b = b, a + b
         return b
 
-def generate_fibonacci_sequence(count):
-    """
-    Generates a list of the first 'count' Fibonacci numbers.
-
-    Args:
-        count (int): The number of Fibonacci numbers to generate.
-                     Must be a non-negative integer.
-
-    Returns:
-        list: A list containing the first 'count' Fibonacci numbers.
-              Returns an empty list for count <= 0.
-    """
-    if count <= 0:
-        return []
-    elif count == 1:
-        return [0]
-    else:
-        sequence = [0, 1]
-        while len(sequence) < count:
-            next_fib = sequence[-1] + sequence[-2]
-            sequence.append(next_fib)
-        return sequence
-
 if __name__ == "__main__":
-    print("--- Fibonacci Number Calculation ---")
-    for i in range(15):
-        print(f"fibonacci({i}) = {fibonacci(i)}")
+    print("--- Fibonacci Sequence Examples ---")
 
-    print("\n--- Testing Edge Cases ---")
-    print(f"fibonacci(-1) = {fibonacci(-1)}") # Expected: -1
-    print(f"fibonacci(0) = {fibonacci(0)}")   # Expected: 0
-    print(f"fibonacci(1) = {fibonacci(1)}")   # Expected: 1
+    # Calculate and print the first 10 Fibonacci numbers
+    print("\nFirst 10 Fibonacci numbers (F(0) to F(9)):")
+    for i in range(10):
+        print(f"F({i}) = {fibonacci(i)}")
 
-    print("\n--- Fibonacci Sequence Generation ---")
-    print(f"First 0 numbers: {generate_fibonacci_sequence(0)}")
-    print(f"First 1 number: {generate_fibonacci_sequence(1)}")
-    print(f"First 5 numbers: {generate_fibonacci_sequence(5)}")
-    print(f"First 10 numbers: {generate_fibonacci_sequence(10)}")
-    print(f"First 20 numbers: {generate_fibonacci_sequence(20)}")
+    # Test with a specific positive number
+    num_positive = 15
+    print(f"\nThe {num_positive}th Fibonacci number (F({num_positive})): {fibonacci(num_positive)}")
+
+    # Test with 0
+    num_zero = 0
+    print(f"The {num_zero}th Fibonacci number (F({num_zero})): {fibonacci(num_zero)}")
+
+    # Test with 1
+    num_one = 1
+    print(f"The {num_one}st Fibonacci number (F({num_one})): {fibonacci(num_one)}")
+
+    # Test with a negative number
+    num_negative = -5
+    print(f"The {num_negative}th Fibonacci number (F({num_negative})): {fibonacci(num_negative)} (usually 0 or error for negative input)")
