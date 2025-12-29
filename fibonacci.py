@@ -2,8 +2,11 @@ def fibonacci(n):
     """
     Calculates the nth Fibonacci number.
 
-    The Fibonacci sequence starts: 0, 1, 1, 2, 3, 5, 8, ...
-    (where F(0) = 0, F(1) = 1)
+    The Fibonacci sequence starts with 0 and 1,
+    and each subsequent number is the sum of the two preceding ones.
+    F(0) = 0
+    F(1) = 1
+    F(n) = F(n-1) + F(n-2) for n > 1
 
     Args:
         n (int): The index of the Fibonacci number to calculate.
@@ -29,12 +32,19 @@ def fibonacci(n):
 
 if __name__ == "__main__":
     print("Fibonacci sequence examples:")
-    for i in range(10):
+
+    # Test cases for small numbers
+    for i in range(11):
         print(f"fibonacci({i}) = {fibonacci(i)}")
 
+    # Test case for a larger number
     print(f"\nfibonacci(20) = {fibonacci(20)}")
 
+    # Test case for a slightly larger number
+    print(f"fibonacci(30) = {fibonacci(30)}")
+
+    # Test error handling
     try:
         fibonacci(-1)
     except ValueError as e:
-        print(f"\nCaught expected error for negative input: {e}")
+        print(f"\nError handling test: {e}")
