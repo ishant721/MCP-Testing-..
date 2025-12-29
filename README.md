@@ -1,1 +1,1 @@
-# MCP-Testing-.. this is the project for testing mcp project..
+# MCP-Testing-.. this is the project for testing mcp project.
