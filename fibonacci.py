@@ -1,7 +1,14 @@
 def fibonacci(n):
-    if n < 0:
-        raise ValueError("Input must be a non-negative integer.")
-    elif n == 0:
+    """
+    Calculates the nth Fibonacci number.
+
+    Args:
+        n (int): The index of the Fibonacci number to calculate (non-negative).
+
+    Returns:
+        int: The nth Fibonacci number. Returns 0 for n <= 0.
+    """
+    if n <= 0:
         return 0
     elif n == 1:
         return 1
@@ -12,22 +19,11 @@ def fibonacci(n):
         return b
 
 if __name__ == "__main__":
-    print("--- Fibonacci Sequence Examples ---")
-    
-    # Print first 10 Fibonacci numbers
-    for i in range(10):
-        print(f"F({i}) = {fibonacci(i)}")
+    print("Fibonacci sequence for n from 0 to 10:")
+    for i in range(11):
+        print(f"fibonacci({i}) = {fibonacci(i)}")
 
-    # Test with a larger number
-    large_n = 20
-    print(f"\nF({large_n}) = {fibonacci(large_n)}")
-
-    # Test error handling for negative input
-    try:
-        print(f"\nAttempting F(-1): {fibonacci(-1)}")
-    except ValueError as e:
-        print(f"\nCaught error for F(-1): {e}")
-
-    # Explicitly test F(0) and F(1) again
-    print(f"\nF(0) = {fibonacci(0)}")
-    print(f"F(1) = {fibonacci(1)}")
+    print("\nCalculating specific Fibonacci numbers:")
+    test_cases = [0, 1, 2, 5, 10, 15, -3]
+    for n in test_cases:
+        print(f"fibonacci({n}) = {fibonacci(n)}")
