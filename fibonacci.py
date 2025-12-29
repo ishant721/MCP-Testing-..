@@ -1,25 +1,16 @@
-import sys
-
 def fibonacci(n):
     """
     Calculates the n-th Fibonacci number.
 
-    The Fibonacci sequence is defined as F(n) = F(n-1) + F(n-2),
-    with F(0) = 0 and F(1) = 1.
-
     Args:
-        n (int): The index of the Fibonacci number to calculate.
-                 Must be a non-negative integer.
+        n (int): The index of the Fibonacci number to calculate (non-negative).
 
     Returns:
         int: The n-th Fibonacci number.
 
     Raises:
-        TypeError: If n is not an integer.
         ValueError: If n is a negative integer.
     """
-    if not isinstance(n, int):
-        raise TypeError("Input must be an integer.")
     if n < 0:
         raise ValueError("Input must be a non-negative integer.")
     elif n == 0:
@@ -33,21 +24,14 @@ def fibonacci(n):
         return b
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        try:
-            num = int(sys.argv[1])
-            result = fibonacci(num)
-            print(f"The {num}-th Fibonacci number is: {result}")
-        except ValueError as e:
-            print(f"Error: {e}")
-            print("Please provide a non-negative integer as an argument.")
-        except TypeError as e:
-            print(f"Error: {e}")
-    else:
-        print("Usage: python fibonacci.py <number>")
-        print("\nDisplaying the first 15 Fibonacci numbers:")
-        for i in range(15):
-            try:
+    print("Fibonacci Sequence Generator")
+    try:
+        num_terms = int(input("Enter the number of Fibonacci terms to generate: "))
+        if num_terms < 0:
+            print("Please enter a non-negative integer.")
+        else:
+            print(f"Generating the first {num_terms} Fibonacci terms:")
+            for i in range(num_terms):
                 print(f"F({i}) = {fibonacci(i)}")
-            except (TypeError, ValueError) as e:
-                print(f"Error calculating F({i}): {e}")
+    except ValueError:
+        print("Invalid input. Please enter an integer.")
