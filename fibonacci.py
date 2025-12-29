@@ -1,26 +1,24 @@
 def fibonacci(n):
     """
-    Calculates the nth Fibonacci number.
+    Calculates the n-th Fibonacci number.
 
-    The Fibonacci sequence starts with 0 and 1.
-    F(0) = 0
-    F(1) = 1
-    F(n) = F(n-1) + F(n-2) for n > 1
+    The Fibonacci sequence starts with F(0) = 0 and F(1) = 1.
+    F(n) = F(n-1) + F(n-2) for n > 1.
 
     Args:
-        n (int): The index of the desired Fibonacci number (non-negative).
+        n (int): The index of the Fibonacci number to calculate. Must be a non-negative integer.
 
     Returns:
-        int: The nth Fibonacci number.
+        int: The n-th Fibonacci number.
 
     Raises:
-        TypeError: If the input n is not an integer.
-        ValueError: If the input n is a negative integer.
+        ValueError: If n is a negative integer.
+        TypeError: If n is not an integer.
     """
     if not isinstance(n, int):
-        raise TypeError("Input must be an integer.")
+        raise TypeError("Input 'n' must be an integer.")
     if n < 0:
-        raise ValueError("Input must be a non-negative integer.")
+        raise ValueError("Input 'n' must be a non-negative integer.")
     elif n == 0:
         return 0
     elif n == 1:
@@ -32,34 +30,28 @@ def fibonacci(n):
         return b
 
 if __name__ == "__main__":
-    print("Fibonacci Sequence Generator")
-    print("---------------------------\n")
-
-    # Print the first 10 Fibonacci numbers
-    print("First 10 Fibonacci numbers:")
-    for i in range(10):
+    print("Fibonacci sequence up to F(10):")
+    for i in range(11):
         print(f"F({i}) = {fibonacci(i)}")
 
-    # Example of calculating a specific Fibonacci number
-    n_value = 15
-    print(f"\nFibonacci({n_value}) = {fibonacci(n_value)}")
+    print("\nTesting specific values:")
+    print(f"F(7) = {fibonacci(7)}")
+    print(f"F(0) = {fibonacci(0)}")
+    print(f"F(1) = {fibonacci(1)}")
+    print(f"F(20) = {fibonacci(20)}")
 
-    # Example of handling invalid input
+    # Example of error handling
     try:
-        print(f"\nFibonacci(-3) = {fibonacci(-3)}")
+        fibonacci(-5)
     except ValueError as e:
-        print(f"\nError calculating F(-3): {e}")
+        print(f"\nError calculating F(-5): {e}")
 
     try:
-        print(f"Fibonacci(5.5) = {fibonacci(5.5)}")
+        fibonacci(3.5)
     except TypeError as e:
-        print(f"Error calculating F(5.5): {e}")
+        print(f"Error calculating F(3.5): {e}")
 
-    # You can also take user input
-    # try:
-    #     user_input = int(input("\nEnter a non-negative integer to find its Fibonacci number: "))
-    #     print(f"Fibonacci({user_input}) = {fibonacci(user_input)}")
-    # except ValueError:
-    #     print("Invalid input. Please enter an integer.")
-    # except Exception as e:
-    #     print(f"An unexpected error occurred: {e}")
+    try:
+        fibonacci("abc")
+    except TypeError as e:
+        print(f"Error calculating F('abc'): {e}")
