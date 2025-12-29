@@ -2,92 +2,70 @@ def fibonacci(n):
     """
     Calculates the nth Fibonacci number.
 
+    The Fibonacci sequence starts with F(0) = 0 and F(1) = 1.
+    For n > 1, F(n) = F(n-1) + F(n-2).
+
     Args:
-        n (int): The index of the Fibonacci number to calculate.
-                 n must be a non-negative integer.
+        n (int): The non-negative integer index of the desired Fibonacci number.
 
     Returns:
         int: The nth Fibonacci number.
-             Returns 0 for n=0, 1 for n=1 and n=2.
+
+    Raises:
+        ValueError: If n is not a non-negative integer.
     """
     if not isinstance(n, int) or n < 0:
         raise ValueError("Input must be a non-negative integer.")
+
     if n == 0:
         return 0
     elif n == 1:
         return 1
     else:
         a, b = 0, 1
+        # Loop from the 2nd number up to the nth number (inclusive)
+        # F(2) is calculated in the first iteration of the loop
         for _ in range(2, n + 1):
             a, b = b, a + b
         return b
 
-def print_fibonacci_sequence(count):
-    """
-    Prints the first 'count' Fibonacci numbers.
-
-    Args:
-        count (int): The number of Fibonacci numbers to print.
-                     count must be a non-negative integer.
-    """
-    if not isinstance(count, int) or count < 0:
-        raise ValueError("Count must be a non-negative integer.")
-
-    if count == 0:
-        print("Fibonacci sequence (0 numbers): []")
-        return
-    
-    sequence = [0] if count > 0 else []
-    if count > 1:
-        sequence.append(1)
-    
-    a, b = 0, 1
-    for _ in range(2, count):
-        a, b = b, a + b
-        sequence.append(b)
-    
-    print(f"Fibonacci sequence ({count} numbers): {sequence}")
-
-
 if __name__ == "__main__":
-    print("--- Calculating nth Fibonacci number ---")
-    try:
-        print(f"Fibonacci(0): {fibonacci(0)}")
-        print(f"Fibonacci(1): {fibonacci(1)}")
-        print(f"Fibonacci(2): {fibonacci(2)}")
-        print(f"Fibonacci(3): {fibonacci(3)}")
-        print(f"Fibonacci(5): {fibonacci(5)}")
-        print(f"Fibonacci(10): {fibonacci(10)}")
-        print(f"Fibonacci(20): {fibonacci(20)}")
-    except ValueError as e:
-        print(f"Error: {e}")
+    print("--- Fibonacci Number Examples ---")
 
-    print("\n--- Printing Fibonacci sequence ---")
-    try:
-        print_fibonacci_sequence(0)
-        print_fibonacci_sequence(1)
-        print_fibonacci_sequence(2)
-        print_fibonacci_sequence(5)
-        print_fibonacci_sequence(10)
-    except ValueError as e:
-        print(f"Error: {e}")
+    # Test cases with expected results
+    test_cases = [
+        (0, 0),
+        (1, 1),
+        (2, 1),
+        (3, 2),
+        (4, 3),
+        (5, 5),
+        (6, 8),
+        (7, 13),
+        (8, 21),
+        (9, 34),
+        (10, 55),
+        (20, 6765) # F(20)
+    ]
 
-    # Example of invalid input handling:
-    # try:
-    #     fibonacci(-1)
-    # except ValueError as e:
-    #     print(f"\nCaught expected error for Fibonacci(-1): {e}")
+    for n, expected in test_cases:
+        try:
+            result = fibonacci(n)
+            status = "✅" if result == expected else "❌"
+            print(f"F({n:2}) = {result:<5} (Expected: {expected:<5}) {status}")
+        except ValueError as e:
+            print(f"F({n:2}) = Error: {e}")
+        except Exception as e:
+            print(f"F({n:2}) = An unexpected error occurred: {e}")
 
-    # try:
-    #     print_fibonacci_sequence(-1)
-    # except ValueError as e:
-    #     print(f"Caught expected error for print_fibonacci_sequence(-1): {e}")
+    print("\n--- Testing invalid inputs ---")
+    invalid_inputs = [-1, 3.5, "abc", None]
 
-    # You can uncomment the following block to allow user input
-    # try:
-    #     num_str = input("\nEnter a non-negative integer 'n' to calculate Fibonacci(n) and its sequence: ")
-    #     n = int(num_str)
-    #     print(f"The {n}th Fibonacci number is: {fibonacci(n)}")
-    #     print_fibonacci_sequence(n)
-    # except ValueError:
-    #     print("Invalid input. Please enter a non-negative integer.")
+    for invalid_n in invalid_inputs:
+        try:
+            fibonacci(invalid_n)
+            print(f"F({invalid_n}) = No error raised for invalid input. ❌")
+        except ValueError as e:
+            print(f"F({invalid_n}) = Error: {e} ✅")
+        except Exception as e:
+            print(f"F({invalid_n}) = An unexpected error occurred: {e} ❌")
