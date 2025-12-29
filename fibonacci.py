@@ -1,18 +1,22 @@
 def fibonacci(n):
     """
-    Calculates the nth Fibonacci number.
+    Calculates the n-th Fibonacci number.
 
-    The Fibonacci sequence starts with F(0) = 0 and F(1) = 1.
-    F(n) = F(n-1) + F(n-2) for n > 1.
+    The Fibonacci sequence starts with F(0) = 0, F(1) = 1,
+    and F(n) = F(n-1) + F(n-2) for n > 1.
 
     Args:
-        n (int): The index of the Fibonacci number to calculate (non-negative).
+        n (int): The index of the Fibonacci number to calculate.
+                 Must be a non-negative integer.
 
     Returns:
-        int: The nth Fibonacci number. Returns 0 for negative input.
+        int or str: The n-th Fibonacci number, or an error message
+                    if the input is invalid.
     """
+    if not isinstance(n, int):
+        return "Input must be an integer."
     if n < 0:
-        return 0  # Fibonacci numbers are typically defined for non-negative integers
+        return "Input must be a non-negative integer."
     elif n == 0:
         return 0
     elif n == 1:
@@ -24,25 +28,24 @@ def fibonacci(n):
         return b
 
 if __name__ == "__main__":
-    print("--- Fibonacci Sequence Examples ---")
-
-    # Calculate and print the first 10 Fibonacci numbers
-    print("\nFirst 10 Fibonacci numbers (F(0) to F(9)):")
-    for i in range(10):
+    print("--- Fibonacci Sequence ---")
+    
+    # Print the first 15 Fibonacci numbers
+    print("\nFirst 15 Fibonacci numbers:")
+    for i in range(15):
         print(f"F({i}) = {fibonacci(i)}")
 
-    # Test with a specific positive number
-    num_positive = 15
-    print(f"\nThe {num_positive}th Fibonacci number (F({num_positive})): {fibonacci(num_positive)}")
+    # Example of getting a specific Fibonacci number
+    print("\n--- Specific Fibonacci Numbers ---")
+    test_cases = [7, 10, 20, 0, 1, -5, 3.5]
+    for num in test_cases:
+        result = fibonacci(num)
+        print(f"The Fibonacci number at index {num} is: {result}")
 
-    # Test with 0
-    num_zero = 0
-    print(f"The {num_zero}th Fibonacci number (F({num_zero})): {fibonacci(num_zero)}")
-
-    # Test with 1
-    num_one = 1
-    print(f"The {num_one}st Fibonacci number (F({num_one})): {fibonacci(num_one)}")
-
-    # Test with a negative number
-    num_negative = -5
-    print(f"The {num_negative}th Fibonacci number (F({num_negative})): {fibonacci(num_negative)} (usually 0 or error for negative input)")
+    # You can also get user input for a specific number
+    # try:
+    #     user_input = int(input("\nEnter a non-negative integer to find its Fibonacci number: "))
+    #     fib_result = fibonacci(user_input)
+    #     print(f"The F({user_input}) is: {fib_result}")
+    # except ValueError:
+    #     print("Invalid input. Please enter an integer.")
