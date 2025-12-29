@@ -1,50 +1,35 @@
-def fibonacci(n):
+def generate_fibonacci_sequence(n_terms):
     """
-    Calculates the nth Fibonacci number.
-
-    The Fibonacci sequence starts with 0 and 1,
-    and each subsequent number is the sum of the two preceding ones.
-    F(0) = 0
-    F(1) = 1
-    F(n) = F(n-1) + F(n-2) for n > 1
+    Generates a list containing the first n_terms of the Fibonacci sequence.
 
     Args:
-        n (int): The index of the Fibonacci number to calculate.
-                 Must be a non-negative integer.
+        n_terms (int): The number of terms to generate. Must be a non-negative integer.
 
     Returns:
-        int: The nth Fibonacci number.
-
-    Raises:
-        ValueError: If n is a negative integer.
+        list: A list of Fibonacci numbers. Returns an empty list if n_terms <= 0.
     """
-    if n < 0:
-        raise ValueError("Input must be a non-negative integer.")
-    elif n == 0:
-        return 0
-    elif n == 1:
-        return 1
+    if n_terms <= 0:
+        return []
+    elif n_terms == 1:
+        return [0]
     else:
-        a, b = 0, 1
-        for _ in range(2, n + 1):
-            a, b = b, a + b
-        return b
+        sequence = [0, 1]
+        while len(sequence) < n_terms:
+            next_term = sequence[-1] + sequence[-2]
+            sequence.append(next_term)
+        return sequence
 
 if __name__ == "__main__":
-    print("Fibonacci sequence examples:")
-
-    # Test cases for small numbers
-    for i in range(11):
-        print(f"fibonacci({i}) = {fibonacci(i)}")
-
-    # Test case for a larger number
-    print(f"\nfibonacci(20) = {fibonacci(20)}")
-
-    # Test case for a slightly larger number
-    print(f"fibonacci(30) = {fibonacci(30)}")
-
-    # Test error handling
     try:
-        fibonacci(-1)
-    except ValueError as e:
-        print(f"\nError handling test: {e}")
+        num_terms = int(input("Enter the number of Fibonacci terms to generate: "))
+        if num_terms < 0:
+            print("Please enter a non-negative integer.")
+        else:
+            fib_sequence = generate_fibonacci_sequence(num_terms)
+            if fib_sequence:
+                print(f"The first {num_terms} Fibonacci terms are:")
+                print(fib_sequence)
+            else:
+                print(f"No Fibonacci sequence generated for {num_terms} terms.")
+    except ValueError:
+        print("Invalid input. Please enter an integer.")
