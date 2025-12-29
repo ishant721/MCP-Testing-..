@@ -12,15 +12,22 @@ def fibonacci(n):
         return b
 
 if __name__ == "__main__":
-    print("Fibonacci Sequence:")
+    print("--- Fibonacci Sequence Examples ---")
+    
+    # Print first 10 Fibonacci numbers
     for i in range(10):
-        print(f"fibonacci({i}) = {fibonacci(i)}")
+        print(f"F({i}) = {fibonacci(i)}")
 
+    # Test with a larger number
+    large_n = 20
+    print(f"\nF({large_n}) = {fibonacci(large_n)}")
+
+    # Test error handling for negative input
     try:
-        num = int(input("\nEnter a non-negative integer to find its Fibonacci number: "))
-        result = fibonacci(num)
-        print(f"The {num}th Fibonacci number is: {result}")
+        print(f"\nAttempting F(-1): {fibonacci(-1)}")
     except ValueError as e:
-        print(f"Error: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        print(f"\nCaught error for F(-1): {e}")
+
+    # Explicitly test F(0) and F(1) again
+    print(f"\nF(0) = {fibonacci(0)}")
+    print(f"F(1) = {fibonacci(1)}")
